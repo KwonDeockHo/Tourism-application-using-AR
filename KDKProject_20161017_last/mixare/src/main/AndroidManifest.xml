@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+      android:versionCode="26" android:versionName="0.9.2" package="org.stampar" android:installLocation="auto"
+	>
+
+	<permission
+		android:name="com.example.leejongho.leejongho1009.locationapi.maps.permission.MAPS_RECEIVE"
+		android:protectionLevel="signature" />
+
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="com.example.leejongho.leejongho1009.locationapi.maps.permission.MAPS_RECEIVE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.CAMERA" android:required="false"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-feature android:name="android.hardware.camera" />
+	<uses-feature android:required="false" android:name="android.hardware.camera.autofocus"/>
+	<uses-feature android:required="false" android:name="android.hardware.camera.flash"/>
+	<uses-feature android:required="false" android:name="android.hardware.camera.front"/>
+	<uses-permission android:name="android.permission.WAKE_LOCK"/>
+	<uses-feature
+		android:glEsVersion="0x00020000"
+		android:required="true" />
+
+	
+	<supports-screens android:anyDensity="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true"></supports-screens>
+
+	
+    <application
+
+		tools:replace="android:label"
+		android:label="@string/app_name"
+		android:allowBackup="true"
+		android:name="android.support.multidex.MultiDexApplication"
+		android:icon="@drawable/ic_launcher"
+		android:hardwareAccelerated="false"
+		android:allowClearUserData="true"
+		android:supportsRtl="true"
+
+		android:largeHeap="true"
+		android:theme="@style/AppTheme"
+		>
+    	<uses-library android:name="com.google.android.maps" />
+
+		<meta-data
+			android:name="com.google.android.geo.API_KEY"
+			android:value="AIzaSyAju__Wm2lYxCNH2HDPIhRQ_pDir3jjMgE" />
+		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        
+    	<activity android:name="org.stampar.MainActivity" android:icon="@drawable/ic_launcher"
+				  android:label="@string/app_name" android:screenOrientation="portrait"
+			>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>     	    
+    	</activity>
+
+		<activity android:name="org.stampar.SecondMain"
+			android:label="KDK_Project">
+
+		</activity>
+    	
+        <activity android:label="@string/app_name" android:name="org.stampar.MixView"
+        android:screenOrientation="landscape"
+        android:launchMode="singleTop">
+
+            
+            <intent-filter>  
+                  <action android:name="android.intent.action.VIEW" />
+				  <category android:name="android.intent.category.DEFAULT" />
+				  <category android:name="android.intent.category.BROWSABLE" />
+				  <data android:scheme="http" android:mimeType="application/mixare-json"/>
+				  <data android:scheme="content" android:mimeType="application/mixare-json"/>
+				  <data android:scheme="file" android:mimeType="application/mixare-json"/>
+            </intent-filter>
+            
+            <intent-filter>
+        	    <action android:name="android.intent.action.SEARCH"/>
+        	</intent-filter>
+        	<meta-data android:name="android.app.searchable"
+                   	android:resource="@xml/searchable"/>
+            <meta-data android:name="android.app.default_searchable"
+               		android:value=".MixView" />
+        </activity>
+        
+		<activity android:name="org.stampar.PluginLoaderActivity">
+		</activity>
+
+		<activity android:name="org.stampar.tutorial_main">
+		</activity>
+
+		<activity android:name="org.stampar.FirstFragment">
+		</activity>
+		
+		<activity android:name="org.stampar.MixListView"
+			android:screenOrientation="user" 
+			android:launchMode="singleTop">
+			<intent-filter>
+	            <action android:name="android.intent.action.SEARCH" />
+	        </intent-filter>
+	        <meta-data android:name="android.app.searchable"
+                   	android:resource="@xml/searchable"/>
+		</activity>
+
+		<activity android:name="org.stampar.MixMap"
+			android:screenOrientation="user" 
+			android:launchMode="singleTop">
+			<intent-filter>
+	            <action android:name="android.intent.action.SEARCH" />
+	        </intent-filter>
+	        <meta-data android:name="android.app.searchable"
+                   	android:resource="@xml/searchable"/>
+		</activity>
+		 <activity android:name="org.stampar.data.DataSource" />
+		 <activity android:name="org.stampar.data.DataSourceList" />
+
+		<activity
+		android:name="org.stampar.InformationView"
+		android:label="KDK_Project">
+	</activity>
+
+
+		<activity
+			android:name="org.stampar.map_activity"
+			android:label="Map">
+		</activity>
+
+		<activity android:name="org.stampar.list_MainActivity"
+			android:configChanges="orientation|keyboardHidden"
+
+			>
+		</activity>
+
+
+		<activity android:name="org.stampar.List_in_Cardview"
+			android:configChanges="orientation|keyboardHidden">
+		</activity>
+
+		<activity android:name="org.stampar.Store_mapview">
+		</activity>
+
+	</application>
+
+</manifest> 

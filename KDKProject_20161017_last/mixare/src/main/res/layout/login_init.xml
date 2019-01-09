@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layer"
+    android:onClick="linearOnClick"
+    >
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_background"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        />
+
+
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/emailInput"
+        android:layout_centerHorizontal="true"
+        android:hint="Name"
+        android:layout_marginTop="200dp"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/passwordInput"
+        android:layout_centerHorizontal="true"
+        android:hint="Password"
+        android:layout_below="@+id/emailInput"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="55dp"
+        android:text="회원가입"
+        android:id="@+id/signupButton"
+        android:background="@drawable/login_button"
+        android:textAllCaps="false"
+        android:layout_marginStart="30dp"
+        android:layout_alignTop="@+id/loginButton"
+        android:layout_alignEnd="@+id/passwordInput"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="55dp"
+        android:text="로그인"
+        android:id="@+id/loginButton"
+        android:textAllCaps="false"
+        android:background="@drawable/login_button"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/passwordInput"
+        android:visibility="invisible"
+        android:layout_toStartOf="@+id/signupButton"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_title"
+        android:id="@+id/login_title"
+        android:layout_alignTop="@+id/emailInput"
+        android:layout_centerHorizontal="true" />
+
+    <com.facebook.login.widget.LoginButton
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:id="@+id/login_facebook"
+        android:visibility="invisible"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/emailInput"
+        android:layout_alignStart="@+id/passwordInput"
+        style="@style/FacebookLoginButton"
+        />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_start"
+        android:id="@+id/login_start"
+        android:layout_below="@+id/signupButton"
+        android:visibility="invisible"
+        android:onClick="startOnClick"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

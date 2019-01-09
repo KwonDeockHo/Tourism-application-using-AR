@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">STAMPAR</string>
+    <string name="search_hint">Search Location</string>
+    
+    <string name="N">N</string>
+    <string name="NE">NE</string>
+    <string name="E">E</string>
+    <string name="SE">SE</string>
+    <string name="S">S</string>
+    <string name="SW">SW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+    
+    <string name="OSM">Openstreetmap</string>
+    <string name="MIXARE">Mixare</string>
+    
+    <string name="CIRCLE_MARKER">Circles</string>
+    <string name="NAVIGATION_MARKER">Arrows</string>
+
+
+	<string name="navigation_drawer_open">Open navigation drawer</string>
+	<string name="navigation_drawer_close">Close navigation drawer</string>
+    
+    <string name="empty_list">Sorry, \nThere is no location information \navailable within this radius.\nPlease try to search in a wider range.</string>
+	<string name="option_not_available">Sorry, We are working on it... \nThis option will be available soon!</string>
+
+	<string name="license">Copyright (C) 2010- Peer internet solutions 
+		\n\nThis program is free software: 	you can redistribute it and/or modify it under the terms of the 
+		GNU General Public License as published by the Free Software Foundation, either version 3 of the License, 
+		or at your option) any later version. 
+		\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public 
+		License for more details. 
+		\n\n You should have received a copy of the GNU General Public License along with this program. 
+		If not, see &lt;http://www.gnu.org/licenses/&gt;
+	</string>
+	
+	<string name="launch_plugins">Launch plugins?</string>
+	<string name="plugin_message">Some plugins where found, do you want to enable them?</string>
+	<string name="remember_this_decision">Remember this decision</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+		
+	<string name="menu_item_1">Data Source</string>
+	<string name="menu_item_2">List view</string>
+	<string name="menu_item_3">Map view</string>
+	<string name="menu_item_4">Zoom level</string>
+	<string name="menu_item_5">Search</string>
+	<string name="menu_item_6">Info</string>
+	<string name="menu_item_7">License</string>
+
+	<string name="cancel">Cancel</string>
+
+	<string name="data_source_edit_err">This data source cannot be edited.</string>
+	<string name="data_source_delete_err">This data source cannot be deleted.</string>
+
+	<string name="connection_error_dialog">Sorry, a connection Error occured! \nPlease check if you are connected to the Internet.</string>
+	<string name="connection_error_dialog_button1">Retry</string>
+	<string name="connection_error_dialog_button2">Open Settings</string>
+	<string name="connection_error_dialog_button3">Close App</string>
+
+	<string name="connection_GPS_dialog_text">The GPS location can not be updated... \nIf you continue it could be that the Information 
+		\nwill not be displayed in the right place.</string>
+	<string name="connection_GPS_dialog_button1">Continue</string>
+	<string name="connection_GPS_dialog_button2">Close</string>
+
+	<string name="no_website_available">Sorry, there is no further \ninformation available.</string>
+
+	<string name="license_title">License</string>
+	<string name="close_button">Close</string>
+	<string name="general_info_title">General Information</string>
+
+	<string name="general_info_text">GPS info: </string>
+	<string name="longitude">Longitude: </string>
+	<string name="latitude">Latitude: </string>
+	<string name="altitude">Altitude: </string>
+	<string name="speed">Speed: </string>
+	<string name="accuracy">Accuracy: </string>
+	<string name="gps_last_fix">Last GPS fix: </string>
+
+	<string name="facebook_app_id">709344379220952</string>
+
+	<string name="map_menu_normal_mode">Map</string>
+	<string name="map_menu_satellite_mode">Satellite</string>
+	<string name="map_menu_cam_mode">Camera</string>
+	<string name="map_my_location">My Location</string>
+	<string name="map_toggle_path_on">Show Path</string>
+	<string name="map_toggle_path_off">Hide Path</string>
+	
+	<string name="map_current_location_click">Your current location</string>
+
+	<string name="data_source_add">Add data source</string>
+	<string name="data_source_edit">Edit data source</string>
+	<string name="data_source_delete">Delete data source</string>
+	<string name="data_source_change_wikipedia">Changed to Wikipedia as data source</string>
+	<string name="data_source_change_twitter">Changed to Twitter as data source</string>
+	<string name="data_source_change_osm">Changed to OpenStreetMap as data source</string>
+
+	<string name="search_failed_notification">No search results</string>
+	<string name="source_openstreetmap">Stations around</string>
+
+	<string name="search_active_1">Search on data source</string>
+	<string name="search_active_2">. Touch to terminate search</string>
+	<string name="download_error">Error while downloading</string>
+	<string name="download_received">Received data from</string>
+
+	<string name="add_osm_menu">Add OpenStreetMap URL</string>
+	<string name="insert_osm_url">Insert OpenStreetMap URL</string>
+	<string name="osm_max_object_menu">Set max POI per URL</string>
+	<string name="set_osm_max_object">Maximum POIs per URL</string>
+	<string name="location_not_found">Location not found, make sure you enabled Wifi location or GPS in the settings.</string>
+	<string name="refreshing">Refreshing</string>
+
+	<string name="action_settings">Settings</string>
+	<string name="action_refresh">Settings</string>
+	<string name="action_new">Settings</string>
+	<string name="logo_desc">App logo</string>
+	<string name="country_name">Nigeria</string>
+    <string name="thearc">  대구 12경에 선정된 고령 강정보는 낙동강 상류 안동댐으로부터 166km ,하류 낙동강 하구 둑으로부터 168km 지점에 위치하고 있다.
+ \r\n디아크는 세계적인 건축 디자이너 하니 라시드가 디자인을 했으며 강문화의 모든 것을 담는 우아하고 기하학적인 건축예술품이란 뜻을 가지고 있다.
+ \r\n 동양 최대의 수문인 강정보는 4대강 최고의 명물로 1km 거리를 편안하고 걸을수 있는 산책로 와 저녁 야경이 일품이다.
+</string>
+	<string name="park_2_28">2·28학생민주의거를 기념하여 만든 공원이다. 2003년 12월 조성되었으며, 면적은 1만 4,279㎡이다. 1960년 일어난 2·28학생민주의거는 부패한 이승만 자유당 정권에 항거하여 대구에서 일어난 학생 민주화운동으로 3·15마산의거, 4·19혁명으로 이어져 이승만 정권을 물러나게 만든 기폭제가 되었다.</string>
+    <string name="duru"> 2000년 9월 29일에 개관한 대구 코오롱야외음악당은 단일공연장으로서는 국내 최대의 규모로 두류공원 내에 위치하고 있다, \r\n  또한 지리적 여건으로 인하여 시민들의 사랑을 받고 있는 명소로 부각되고 있다.
+  음악회를 비롯하여 연극, 뮤지컬, 오페라 등 어떠한 장르의 무대 공연일지라 도 가능하며, 이용자격에 제한을 두지 않는 개방적인 공간이다.
+탁 트인 야외에서 휴식을 겸하여 공연을 감상할 수 있다 </string>
+	<string name="street">[김광석다시그리기길]은 창작의 거리이다.오랜 시간 자연스럽게 형성되어 온 것이 아니라 특정한 구간을 예술작품으로 만든 것이다. 또한 대중음악인의 이름을 딴 거리는 전국에서 최초이다.살아생전 김광석이 기타 하나, 목소리 하나에 혼을 담아 생명을 불어넣었듯이 그저 스쳐지나갔던 차가운 콘크리트가 김광석의 삶과 음악을 표현한 작품들로 인해 다시 생명을 얻게 되었다. </string>
+
+
+</resources>

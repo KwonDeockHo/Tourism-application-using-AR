@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/KDKProject_20161017_15.iml" filepath="$PROJECT_DIR$/KDKProject_20161017_15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dfu/dfu.iml" filepath="$PROJECT_DIR$/dfu/dfu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iBeacon/iBeacon.iml" filepath="$PROJECT_DIR$/iBeacon/iBeacon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iBeaconCordovaLib/iBeaconCordovaLib.iml" filepath="$PROJECT_DIR$/iBeaconCordovaLib/iBeaconCordovaLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mixare/mixare.iml" filepath="$PROJECT_DIR$/mixare/mixare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mixarelib/mixarelib.iml" filepath="$PROJECT_DIR$/mixarelib/mixarelib.iml" />
+    </modules>
+  </component>
+</project>

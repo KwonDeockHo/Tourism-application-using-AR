@@ -1,0 +1,20 @@
+body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
+
+.device_item>li{
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+.device_item>li>span{
+	display: table-cell;
+	width: auto;
+	text-align: start;
+	font-size: 12px;	
+}
+.device_item>li:first-child>span{
+	text-align: left;
+	color: #000;
+	font-size: 16px;
+};

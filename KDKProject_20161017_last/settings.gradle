@@ -1,0 +1,5 @@
+include ':app', ':dfu'
+include ':mixarelib'
+include ':mixare'
+include ':iBeaconCordovaLib'
+include ':iBeacon'

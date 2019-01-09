@@ -1,0 +1,513 @@
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>Minew Beacon</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" charset="utf-8" src="lib/ionic/js/ionic.bundle.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/index.js"></script>
+    <style type="text/css">
+       
+      @media screen and (max-width: 320px) {
+        .uuid_item_text{
+          font-size: 0.7125rem;
+        }
+
+        .in_use_uuid{
+          font-size: 0.8rem;
+        }
+      }
+    
+     @media screen and (min-width: 321px) {
+         .uuid_item_text{
+             font-size: 0.825rem;
+         }
+         
+         .in_use_uuid{
+             
+         }
+    }
+    
+
+      ion-item .right{
+          display:block;
+          float:right;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          max-width:70%;
+          overflow:hidden;
+          text-align:right;
+          min-width:20px;
+      }
+
+
+      .aboutContent{
+        height: 100%;
+        min-height: 100%  
+      }
+
+      #aboutInfo{
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+
+      #aboutInfo .about{
+        height: 3em;
+        line-height: 2em;
+      }
+
+      #aboutInfo .title{
+        height: 4em;
+        line-height: 4em;
+      }
+      
+      #aboutInfo .icon{
+        margin-top:3em;
+        margin-bottom: 1.5em;
+      }
+
+      .madeby{
+          position:fixed;
+          width: 100%;
+          text-align: center;
+          color:#ccc;
+          bottom: 24px;
+      }
+    </style>
+  </head>
+
+  <body ng-controller="MainCtrl">
+
+    <ion-nav-view>
+    
+    </ion-nav-view>
+
+    <script id="templates/event-menu.html" type="text/ng-template">
+      <ion-side-menus enable-menu-with-back-views="true">
+
+        <ion-side-menu-content>
+          <ion-nav-bar class="bar-positive bar-dark">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="left">
+              <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+            
+            <ion-nav-buttons side="right">
+              <button class="button button-icon icon ion-ios7-reload"  ng-click="refresh()"></button>
+            </ion-nav-buttons>
+          </ion-nav-bar>
+
+          <ion-nav-view name="menuContent">
+
+          </ion-nav-view>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="left">
+          <ion-header-bar class="bar-assertive bar-dark ">
+            <h1 class="title" style='text-align:center;'>Menu</h1>
+          </ion-header-bar>
+          <ion-content drag-content="true">
+            <ul class="list">
+              <a href="#/event/home" class="item" menu-close>Home</a>
+              <a href="#/event/about" class="item" menu-close>About</a>
+            </ul>
+          </ion-content>
+        </ion-side-menu>
+
+      </ion-side-menus>
+    </script>
+
+    <script id="templates/home.html" type="text/ng-template">
+      <ion-view view-title="Minew Beacon" >
+        <ion-content>
+           <div class="bar bar-loading bar-energized" ng-if="scanning">
+              <p style="dispaly:block;text-align:center;width:100%;line-height:35px;">
+              Scanning...
+              <p>
+          </div>
+          <ion-list>
+          <ion-item ng-repeat="item in items" item="item" ng-click="goConfig(item)" class="item-icon-left item-icon-right">
+            <i class="icon" ng-class="{'ion-battery-full':item.BATT==100,'ion-battery-half':item.BATT>=50 && item.BATT<100,'ion-battery-low':item.BATT<50 && item.BATT>0,'ion-battery-empty':item.BATT==0}"></i>
+              <ul class="device_item">
+                <li>
+                  <span>{{ item.deviceName }}</span>
+                </li>
+                <li>
+                  <span>RSSI:{{ item.RSSI }}</span>
+                  <span>Major:{{ item.Major }}</span>
+                  <span>Minor:{{ item.Minor }}</span>
+                </li>
+                <li>
+                  <span>{{ item.Distance }} m</span>
+                  <span>{{ item.Proximity }}</span>
+                  <span>CONN:{{ item.CONN }}</span>
+                </li>
+                <li>
+                  <span style="width:33.33%">Tx: {{item.txPowerLevel}} dBm</span>
+                  <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">MAC: {{item.deviceAddress}}</span>
+                </li>
+              </ul>
+            <i class="icon ion-ios7-arrow-right"></i>
+          </ion-item>
+        </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/config.html" type="text/ng-template">
+      <ion-view view-title="Config">
+        <ion-nav-buttons side="right">
+              
+        </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item" class="item-remove-animate item-icon-right" href='#/event/deviceinfo'>
+              Device Information
+              <i class="icon ion-ios7-arrow-right"></i>
+            </ion-item>
+            <ion-item item="item" class="item-remove-animate item-icon-right">
+              Battery Level
+              <span class='right'> {{ batteryService.value }} </span>
+              <i class="icon ion-ios7-arrow-right"></i>
+            </ion-item>
+            <ion-item ng-repeat="item in services" item="item" ng-click="doSomething(item,$index)" class="item-icon-right">
+              {{ item.name }} 
+              <span class='right'> {{ item.text }} </span>
+              <i class="icon ion-ios7-arrow-right"></i>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/deviceinfo.html" type="text/ng-template">
+      <ion-view view-title="Device Information">
+        <ion-nav-buttons side="right">
+
+        </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item" ng-repeat="item in clientSideList">
+              {{ item.name }} <span class='right'> {{ item.value }} </span>
+            </ion-item>
+            <ion-item item="item">
+              <span style="display:block;">{{ regulatoryCertifactionData.name }}<span>
+              <span style="display:block;margin-top:5px;text-align:right"> {{ regulatoryCertifactionData.value }} </span>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/uuid.html" type="text/ng-template">
+      <ion-view view-title="UUID">
+        <ion-nav-buttons side="right">
+
+        </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item">
+              <p>In Use </p>
+              <span class="in_use_uuid">{{ uuid_item.value }}</span>
+            </ion-item>
+            <ion-item item="item item-divider">
+              In Common Use
+            </ion-item>
+            <ion-radio ng-repeat="item in clientSideList"
+                   ng-value="item.value"
+                   ng-model="data.clientSide"
+                   ng-click="selectUUID()">
+                <span class="uuid_item_text">{{ item.text }}</span>
+            </ion-radio>
+            <ion-item item="item" href='#/event/uuid_manualinput' class="item-icon-right">
+              Manual Input
+              <i class="icon ion-ios7-arrow-right"></i>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/uuid_manualinput.html" type="text/ng-template">
+        <ion-view view-title="UUID">
+          <ion-nav-buttons side="right">
+             <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="saveUUID()"></button>
+        </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item item-divider">
+            </ion-item>
+            <label class="item item-input">
+              <input type="text" placeholder="Please enter the UUID" ng-model='data.value'>
+            </label>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/major.html" type="text/ng-template">
+      <ion-view view-title="Major">
+        <ion-nav-buttons side="right">
+           <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click='saveMajor()'></button>
+      </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="number" placeholder="Major" ng-model='major_item.value'>
+            </label>
+          </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='line-height:34px;'>
+            Tips: Major input range &#40;0-65535&#41; .
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/minor.html" type="text/ng-template">
+      <ion-view view-title="Minor">
+        <ion-nav-buttons side="right">
+           <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click='saveMinor()'></button>
+      </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="number" placeholder="Minor" ng-model='minor_item.value'>
+            </label>
+          </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='line-height:34px;'>
+          Tip: Minor input range &#40;0-65535&#41; .
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/measuredpower.html" type="text/ng-template">
+      <ion-view view-title="Measured Power">
+        <ion-nav-buttons side="right">
+           <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="saveMP()"></button>
+      </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="number" placeholder="Please enter the Measured Power" ng-model="data.value">
+            </label>
+          </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='height:280px;'>
+          Tips: Apple devices use the Measured Power value of a Proximity Beacon to help with ranging accuracy.
+          The Measured Power must be set using the following procedure with an iPhone:<br/>
+          1. Hold the iPhone 5S in a portrait orientation with the top half uncovered (this includes cases).<br/>
+          2. While the beacon is advertising,repeatedly sample the RSSI at a 1 meter distance for a minimum of 10 seconds.<br/>
+          3. Discard the highest 10% of the RSSI samples.<br/>
+          4. Discard the lowest 20% of the RSSI samples.<br/>
+          5. Average the remaining samples to obtain the Measured Power value.<br/>
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+
+    <script id="templates/transimssionpower.html" type="text/ng-template">
+      <ion-view view-title="Transimssion Power">
+        <ion-nav-buttons side="right">
+
+      </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+          <ion-radio ng-repeat="item in measuredPowerList" ng-click="selectTP(item)"  ng-value="item.value" ng-model="data.clientSide">
+              <p>{{$index}}</p>
+              <p>{{item.text}} dBm,{{item.meters}} meters</p>
+            </ion-radio>
+          </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='line-height:34px;'>
+          Tips: The range is only a &#114;eference .
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/changepassword.html" type="text/ng-template">
+      <ion-view view-title="Change Password">
+        <ion-nav-buttons side="right">
+           <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="changePassword()"></button>
+      </ion-nav-buttons>
+        <ion-content style="bottom:65px;">
+          <ion-list>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="password" placeholder="Please enter the password" ng-model="data.password">
+            </label>
+            <label class="item item-input">
+              <input type="password" placeholder="Please enter the confirmation password" ng-model="data.confirmPassword">
+            </label>
+          </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='height:65px;'>
+          Tips:Modify password,enter the eight characters&#40; 1,2,a,B,&#64;,&#36;,etc&#41; .The same UUID please unified use the same password.
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/broadcastinginterval.html" type="text/ng-template">
+      <ion-view view-title="Broadcasting Interval">
+        <ion-nav-buttons side="right">
+      </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+          <ion-radio ng-repeat="item in broadcastingIntervalList" ng-click='selectBI(item)' ng-value="item.value" ng-model="data.clientSide">
+              {{item.value}}&nbsp;&nbsp;&nbsp;{{item.text}}
+            </ion-radio>
+          </ion-list>
+          <ion-item item="item" href='#/event/broadcastinginterval_manualinput' class="item-remove-animate item-icon-right">
+              Manual Input
+          </ion-item>
+        </ion-content >
+        <ion-footer-bar class="bar-stable">
+          Tips: Manual input range &#40;11-100&#41; .The unit is 100ms &#46;
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/broadcastinginterval_manualinput.html" type="text/ng-template">
+        <ion-view view-title="Broadcasting Interval">
+          <ion-nav-buttons side="right">
+             <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="saveBI()"></button>
+        </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="number" placeholder="Please enter the Measured Power" ng-model="data.value">
+            </label>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/connectionmode.html" type="text/ng-template">
+      <ion-view view-title="Connection Mode">
+        <ion-nav-buttons side="right">
+      </ion-nav-buttons>
+        <ion-content style="bottom:65px;">
+          <ion-list>
+            <ion-radio ng-repeat="item in connectionModeList" ng-model="data.clientSide" ng-value="item.value" ng-click="selectConnMode(item)">
+              {{item.text}}
+            </ion-radio>
+          </ion-list> 
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='height:65px;'>
+          Tips：The deployed beacon must be worked at the non-connectable mode as Apple iBeacon protocol.
+0: connectible   1: non-connectable
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/serialid.html" type="text/ng-template">
+      <ion-view view-title="Serial ID">
+        <ion-nav-buttons side="right">
+           <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="saveSerialID()"></button>
+      </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="number" placeholder="Please enter the Serial ID" ng-model="data.value">
+            </label>
+          </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='line-height:34px;'>
+          Tip: Serial ID input &#40;1-99999&#41; .
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/ibeaconname.html" type="text/ng-template">
+      <ion-view view-title="iBeacon Name">
+        <ion-nav-buttons side="right">
+           <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="saveiBeaconName()"></button>
+      </ion-nav-buttons>
+        <ion-content>
+          <ion-list>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="text" placeholder="Please enter the Serial ID" ng-model="data.value">
+            </label>
+          </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='height:65px;'>
+          Tip: iBeacon Name  input any characters can be shown, longest 12 bytes, shortest 1 byte.
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+
+    <script id="templates/softreboot.html" type="text/ng-template">
+      <ion-view view-title="softreboot">
+        <ion-nav-buttons side="right">
+           <button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="savePassword()"></button>
+      </ion-nav-buttons>
+        <ion-content style='bottom:65px'>
+            <ion-item item="item item-divider">
+
+            </ion-item>
+            <label class="item item-input">
+              <input type="password" placeholder="Please enter the password" ng-model="data.password">
+            </label>
+            <li class="item item-checkbox">
+               <label class="checkbox">
+                 <input type="checkbox" ng-model="data.checked" ng-checked="data.checked">
+               </label>
+               Save Password
+            </li>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" style='height:65px'>
+          Tips: Choose “Save Password” to reboot the beacon, the password will not be required in the next time.
+        </ion-footer-bar>
+      </ion-view>
+    </script>
+  
+    <script id="templates/about.html" type="text/ng-template">
+      <ion-view view-title="About">
+        <ion-nav-buttons side="right">
+
+        </ion-nav-buttons>
+        <ion-content class="aboutContent">
+          <div id="aboutInfo">
+            <div class="icon">
+              <img src="img/ic_launcher.png" alt="">
+            </div>
+            <div class="about">Version:1.0.0</div>
+            <div class="title"></div>
+            <div class="about"><a href="http://www.minewtech.com/">http://www.minewtech.com/</a></div>
+          </div>
+        </ion-content>
+        <div class="madeby">
+          <span>Powered by </span><img style="width:40px" src="img/JUMA-LOGO.png">
+        </div>
+      </ion-view>
+    </script>
+  </body>
+</html>
